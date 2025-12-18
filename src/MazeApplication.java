@@ -281,6 +281,8 @@ class MazePanel extends JPanel {
         this.phaseExplore = true;
         this.isAnimating = true;
 
+        SoundManager.startScanning();
+
         if(timer != null && timer.isRunning()) timer.stop();
         timer = new Timer(delay, e -> updateAnimation());
         timer.start();
@@ -295,6 +297,8 @@ class MazePanel extends JPanel {
                     animIndex++;
                 } else {
                     phaseExplore = false;
+                    //  MATIKAN SUARA SCANNING ---
+                    SoundManager.stopScanning();
                     animIndex = 0;
                     break;
                 }
@@ -305,6 +309,7 @@ class MazePanel extends JPanel {
                 animIndex++;
             } else {
                 timer.stop();
+                SoundManager.stopScanning();
                 isAnimating = false;
                 if(onFinish != null) onFinish.run();
             }
